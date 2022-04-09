@@ -1,5 +1,6 @@
 import {View, TouchableOpacity, Image, Text} from 'react-native';
 import styles from './style'
+import Icon from 'react-native-vector-icons/AntDesign'
 
 export default function Start({ navigation }) {
     return(
@@ -11,9 +12,12 @@ export default function Start({ navigation }) {
             </Text>
             <TouchableOpacity
                 style={styles.btnStart}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('Minha cidade')}
             >
-                <Text style={styles.textStart}>Começar</Text>
+                <Text style={styles.textStart}>
+                    Começar
+                    <Icon name="caretright" size={15} color="white"></Icon>
+                </Text>
             </TouchableOpacity>
             <Text style={styles.version}>v1.0</Text>
         </View>
