@@ -1,14 +1,13 @@
 import {View, Text, TouchableOpacity} from 'react-native';
+import styles from './style'
 
 export default function Start({navigation}) {
     return(
-        <View >
+        <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Adicionar cidade')}
             >
-                <Text>
-                    Minhas cidades
-                </Text>
+                
             </TouchableOpacity>
         </View>
     )

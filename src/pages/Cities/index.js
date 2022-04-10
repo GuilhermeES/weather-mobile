@@ -1,30 +1,40 @@
-import {View, Button, TextInput,  TouchableOpacity, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign'
+import {View, TextInput,  TouchableOpacity, Text} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import ListCities from '../../components/Home/ListCities';
-import styles from './style'
+import { useState } from 'react';
+import axios from 'axios';
+import {api, key} from '../../service/config'
+import styles from './style';
 
-export default function Cities({ navigation }) {
+export default function Cities() {
+    const [cities, setCities] = useState([]);
+    const [city, setCity] = useState('');
+
+    function addCity() {
+        axios.get(`${api}weather?q=${city}&appid=${key}&lang=pt_br&units=metric`)
+        .then(data => {
+            setCities((arr) => [data, ...arr])
+            setCity('')
+        })
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.containerSearch}>
                 <Icon name="search1" size={15} color="black" style={styles.search}></Icon>
-                <TextInput placeholder='Adicionar cidade...' keyboardType='numeric' style={styles.inputSearch}></TextInput>
+                <TextInput placeholder='Adicionar cidade...' keyboardType='numeric' style={styles.inputSearch} onChangeText={setCity} value={city}></TextInput>
                 <TouchableOpacity
                     style={styles.btnAdd}
-                    title="Va para Start"
-                    onPress={() => navigation.navigate('Start')}
+                    title="Adicionar"
+                    onPress={() => addCity()}
                 >
-                <Text style={styles.textBtnAdd}>
-                    Adicionar
-                </Text>
+                    <Text style={styles.textBtnAdd}>
+                        Adicionar
+                    </Text>
                 </TouchableOpacity>
             </View >
             <Text style={styles.title}>Minhas cidades: </Text>
-            <ListCities/>
-            <Button
-                title="Va para Start"
-                onPress={() => navigation.navigate('Start')}
-            />
+            <ListCities cities={cities} />
         </View>
     )
 }

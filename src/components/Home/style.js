@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#449BE4',
         padding: 20,
         borderRadius: 10,
+        marginTop: 20
     },
     header: {
         flexDirection: 'row',
@@ -31,7 +32,16 @@ const styles = StyleSheet.create({
     temperatureCelcius: {
         fontSize: 20,
         color: '#ffffff'
-    }
+    },
+    description :{
+        color: '#ffffff',
+        fontSize: 20,
+        textTransform: "uppercase"
+    },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+    },
 })
 
 export default styles

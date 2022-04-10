@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         paddingTop: 40,
-        paddingBottom: 30
     }
 })
 
