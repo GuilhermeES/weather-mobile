@@ -4,7 +4,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        paddingTop: 70,
+        paddingBottom: 100
     },
     containerSearch: {
         width: '100%',
@@ -34,11 +36,13 @@ const styles = StyleSheet.create({
        zIndex: 10,
        left: 10,
        top: 11     
-    },
+    },  
     title: {
         fontSize: 20,
         paddingTop: 40,
-    }
+        marginBottom: 20
+    },
+
 })
 
 export default styles

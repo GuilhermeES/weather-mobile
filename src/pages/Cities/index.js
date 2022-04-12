@@ -1,4 +1,4 @@
-import {View, TextInput,  TouchableOpacity, Text} from 'react-native';
+import {View, TextInput,  TouchableOpacity, Text, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCities from '../../components/Home/ListCities';
 import { useState } from 'react';
@@ -11,20 +11,43 @@ export default function Cities() {
     const [city, setCity] = useState('');
 
     function addCity() {
-        axios.get(`${api}weather?q=${city}&appid=${key}&lang=pt_br&units=metric`)
-        .then(data => {
-            setCities((arr) => [data, ...arr])
-            setCity('')
-        })
+        if(city == ''){
+            Alert.alert('Error', 'Escreva um nome válido',[
+                {text:'OK'}
+            ])
+        }
+        else{
+            axios.get(`${api}weather?q=${city}&appid=${key}&lang=pt_br&units=metric`)
+            .then(response => {
+                console.log(response.data)
+                if(response.data.cod == 200){
+                    const repeatCity = cities.find(item => item.id == response.data.id)
+                    if(!repeatCity){
+                        setCities((arr) => [response.data, ...arr])
+                        setCity('')   
+                    }
+                    else{
+                        Alert.alert('Error', 'Cidade já cadastrada',[
+                            {text:'OK'}
+                        ])
+                    }
+                }
+            })
+            .catch( () => {
+                Alert.alert('Error', 'Cidade não encontrada',[
+                    {text:'OK'}
+                ])
+            })
+        }
     }
 
     return(
         <View style={styles.container}>
             <View style={styles.containerSearch}>
                 <Icon name="search1" size={15} color="black" style={styles.search}></Icon>
-                <TextInput placeholder='Adicionar cidade...' keyboardType='numeric' style={styles.inputSearch} onChangeText={setCity} value={city}></TextInput>
+                <TextInput placeholder='Adicionar cidade...' keyboardType='default' style={styles.inputSearch} onChangeText={setCity} value={city}></TextInput>
                 <TouchableOpacity
-                    style={styles.btnAdd}
+                    style={[styles.btnAdd, styles.shadowProp]}
                     title="Adicionar"
                     onPress={() => addCity()}
                 >
@@ -33,7 +56,10 @@ export default function Cities() {
                     </Text>
                 </TouchableOpacity>
             </View >
-            <Text style={styles.title}>Minhas cidades: </Text>
+            {cities.length == 0
+                ?  <Text style={styles.title}>Nenhuma cidade cadastrada...</Text>
+                :  <Text style={styles.title}>Minhas cidades: </Text>
+            }
             <ListCities cities={cities} />
         </View>
     )
