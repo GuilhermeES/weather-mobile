@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text , View} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
 import Cities from './src/pages/Cities/';
 import Start from './src/pages/Start/';
 import MyCity from './src/pages/MyCity/';
@@ -58,7 +58,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Start" component={Start} options={{headerShown:false}} />
-        <Stack.Screen name="Minha cidade" component={HomeTabs}  options={{headerShown:false}}/>
+        <Stack.Screen name="Home" component={HomeTabs}  options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

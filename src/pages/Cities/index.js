@@ -1,4 +1,4 @@
-import {View, TextInput,  TouchableOpacity, Text, Alert} from 'react-native';
+import {View, TextInput,  TouchableOpacity, Text, Alert, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ListCities from '../../components/Home/ListCities';
 import { useState } from 'react';
@@ -19,17 +19,18 @@ export default function Cities() {
         else{
             axios.get(`${api}weather?q=${city}&appid=${key}&lang=pt_br&units=metric`)
             .then(response => {
-                console.log(response.data)
                 if(response.data.cod == 200){
                     const repeatCity = cities.find(item => item.id == response.data.id)
                     if(!repeatCity){
                         setCities((arr) => [response.data, ...arr])
-                        setCity('')   
+                        setCity('')
+                        Keyboard.dismiss()   
                     }
                     else{
                         Alert.alert('Error', 'Cidade já cadastrada',[
                             {text:'OK'}
                         ])
+                        Keyboard.dismiss()   
                     }
                 }
             })
@@ -37,6 +38,7 @@ export default function Cities() {
                 Alert.alert('Error', 'Cidade não encontrada',[
                     {text:'OK'}
                 ])
+                Keyboard.dismiss()   
             })
         }
     }

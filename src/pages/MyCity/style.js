@@ -5,7 +5,9 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection:'column',
         backgroundColor: '#ffffff',
-        width: '100%'
+        width: '100%',
+        position: 'relative',
+        zIndex: 0
     },
     header: {
         backgroundColor: '#449BE4',
@@ -58,14 +60,18 @@ const styles = StyleSheet.create({
         bottom: 25,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        marginBottom: 65
+        marginBottom: 65,
+    },
+    contentItens: {
+        width: '97%'
     },
     minMax: {
         flexDirection: 'row',
         marginBottom: 20,
-        flex: '2',
         justifyContent: 'space-between',
-      
+    },
+    spaceRight: {
+        marginRight: 10
     },
     cardInfo: {
         backgroundColor: '#449BE4',
@@ -77,7 +83,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#449BE4',
         padding: 15,
         borderRadius:30,
-        width: '100%'
+        width: '100%',
+        marginBottom: 10
     },
     cardInfoCord: {
         backgroundColor: '#449BE4',
@@ -93,7 +100,19 @@ const styles = StyleSheet.create({
     anotherInfoItens:{
         flexDirection: 'column',
         width: '50%'
-    }    
+    } ,
+    loader:{
+        backgroundColor: '#ffffff',
+        position: 'absolute',
+        zIndex: 2,
+        alignItems:'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
+    },
+    errorMsg:{
+        fontSize: 30,
+    }  
     
 })
 
